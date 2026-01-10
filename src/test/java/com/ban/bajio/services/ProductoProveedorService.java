@@ -7,11 +7,11 @@ import com.ban.bajio.repository.ProductoProveedorRepository;
 import jakarta.transaction.Transactional;
 
 @Service
-public class ProuctoProveedorService {
+public class ProductoProveedorService {
     
     private final ProductoProveedorRepository productoProveedorRepository;
 
-    public ProuctoProveedorService( ProductoProveedorRepository productoProveedorRepository) {
+    public ProductoProveedorService( ProductoProveedorRepository productoProveedorRepository) {
          this.productoProveedorRepository = productoProveedorRepository;
     }
 
