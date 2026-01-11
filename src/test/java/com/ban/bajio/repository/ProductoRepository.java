@@ -7,17 +7,18 @@ import org.springframework.data.repository.query.Param;
 import com.ban.bajio.models.Producto;
 import java.util.List;
 
-public interface ProductoRepository  extends  JpaRepository{
-    
+
+public interface ProductoRepository extends JpaRepository<Producto, Long> {
+
     // Listado con filtros (Clave y Tipo Producto)
-    @Procedure(name = "sp_listar_productos")
+    @Procedure(procedureName = "sp_listar_productos")
     List<Producto> listarProductos(
             @Param("p_clave") String clave,
             @Param("p_id_tipo_producto") Long idTipoProducto
     );
 
     // Alta de producto
-    @Procedure(name = "sp_insertar_producto")
+    @Procedure(procedureName = "sp_insertar_producto")
     void insertarProducto(
             @Param("p_clave") String clave,
             @Param("p_nombre") String nombre,
@@ -26,7 +27,7 @@ public interface ProductoRepository  extends  JpaRepository{
     );
 
     // Actualizar producto
-    @Procedure(name = "sp_actualizar_producto")
+    @Procedure(procedureName = "sp_actualizar_producto")
     void actualizarProducto(
             @Param("p_id_producto") Long idProducto,
             @Param("p_nombre") String nombre,
@@ -36,6 +37,8 @@ public interface ProductoRepository  extends  JpaRepository{
     );
 
     // Borrado lógico
-    @Procedure(name = "sp_desactivar_producto")
-    void desactivarProducto(@Param("p_id_producto") Long idProducto);
+    @Procedure(procedureName = "sp_desactivar_producto")
+    void desactivarProducto(
+            @Param("p_id_producto") Long idProducto
+    );
 }
