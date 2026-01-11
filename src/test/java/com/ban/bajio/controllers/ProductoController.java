@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController
-@RequestMapping("/api/prouctos")
+@RequestMapping("/api/productos")
 public class ProductoController {
     private final ProductoService productoService;
 
@@ -30,11 +30,12 @@ public class ProductoController {
         this.productoService = productoService;
     }
 
-    @GetMapping("")
-    public ResponseEntity<List<Producto>> listarProductos(@RequestParam String clave,@RequestParam Long idTipoProducto) {
+    @GetMapping
+    public ResponseEntity<List<Producto>> listarProductos(@RequestParam(required = false) String clave,@RequestParam(required = false) Long idTipoProducto) {
         return ResponseEntity.ok(
-            productoService.listarProductos(clave, idTipoProducto);
-        );
+            productoService.listarProductos(clave, idTipoProducto));
+        
+        
     }
 
     @PostMapping("")
@@ -43,13 +44,13 @@ public class ProductoController {
         return ResponseEntity.ok().build();
     }
     
-    @PutMapping("")
+    @PutMapping("/{id}")
     public ResponseEntity<Void> actualizarProducto(@PathVariable Long id, @RequestBody Producto entity) {
         this.productoService.actualizarProducto(id ,entity);
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarProducto(@PathVariable Long id){
         this.productoService.eliminarProducto(id);
         return ResponseEntity.ok().build();
