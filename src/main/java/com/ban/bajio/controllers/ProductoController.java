@@ -3,6 +3,7 @@ package com.ban.bajio.controllers;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ban.bajio.dto.ProductoRequest;
 import com.ban.bajio.models.Producto;
 import com.ban.bajio.services.ProductoService;
 
@@ -39,7 +40,7 @@ public class ProductoController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Void> crearProducto(@RequestBody Producto producto) {
+    public ResponseEntity<Void> crearProducto(@RequestBody ProductoRequest producto) {
         productoService.crearProducto(producto);
         return ResponseEntity.ok().build();
     }
@@ -55,6 +56,13 @@ public class ProductoController {
         this.productoService.eliminarProducto(id);
         return ResponseEntity.ok().build();
     }
+
+     @DeleteMapping("eliminaRelaciones/{id}")
+    public ResponseEntity<Void> borrarProducto(@PathVariable Long id) {
+        productoService.eliminarProductoCascade(id);
+        return ResponseEntity.noContent().build(); // 204 No Content
+    }
+    
     
     
 }

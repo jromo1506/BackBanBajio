@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 
 import com.ban.bajio.models.Producto;
+
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -17,14 +19,16 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
             @Param("p_id_tipo_producto") Long idTipoProducto
     );
 
+    
+
     // Alta de producto
     @Procedure(procedureName = "sp_insertar_producto")
-    void insertarProducto(
-            @Param("p_clave") String clave,
-            @Param("p_nombre") String nombre,
-            @Param("p_precio") Double precio,
-            @Param("p_id_tipo_producto") Long idTipoProducto
-    );
+        void insertarProducto(
+        @Param("p_clave") String clave,
+        @Param("p_nombre") String nombre,
+        @Param("p_precio") BigDecimal precio,
+        @Param("p_id_tipo_producto") Long idTipoProducto
+        );
 
     // Actualizar producto
     @Procedure(procedureName = "sp_actualizar_producto")
@@ -41,4 +45,12 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
     void desactivarProducto(
             @Param("p_id_producto") Long idProducto
     );
+
+
+    //Borrado cascada
+     @Procedure(procedureName = "sp_borrar_producto")
+    void borrarProducto(Long p_id_producto);
+
+
+
 }

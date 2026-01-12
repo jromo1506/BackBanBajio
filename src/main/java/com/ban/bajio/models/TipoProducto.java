@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.*;
 
 @Getter
@@ -26,6 +29,7 @@ public class TipoProducto {
     private String descripcion;
 
     @OneToMany(mappedBy = "tipoProducto")
+    @JsonIgnore
     private List<Producto> productos;
 
 }
