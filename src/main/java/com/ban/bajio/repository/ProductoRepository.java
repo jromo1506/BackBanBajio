@@ -1,9 +1,11 @@
 package com.ban.bajio.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 
+import com.ban.bajio.dto.ProductoDTO;
 import com.ban.bajio.models.Producto;
 
 import java.math.BigDecimal;
@@ -13,12 +15,11 @@ import java.util.List;
 public interface ProductoRepository extends JpaRepository<Producto, Long> {
 
     // Listado con filtros (Clave y Tipo Producto)
-    @Procedure(procedureName = "sp_listar_productos")
-    List<Producto> listarProductos(
-            @Param("p_clave") String clave,
-            @Param("p_id_tipo_producto") Long idTipoProducto
-    );
 
+
+   
+    @Query(value = "CALL sp_listar_productos()", nativeQuery = true)
+    List<Object[]> listarProductosConTipo();
     
 
     // Alta de producto

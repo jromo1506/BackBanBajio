@@ -3,6 +3,7 @@ package com.ban.bajio.controllers;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ban.bajio.dto.ProductoDTO;
 import com.ban.bajio.dto.ProductoRequest;
 import com.ban.bajio.models.Producto;
 import com.ban.bajio.services.ProductoService;
@@ -31,12 +32,10 @@ public class ProductoController {
         this.productoService = productoService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<Producto>> listarProductos(@RequestParam(required = false) String clave,@RequestParam(required = false) Long idTipoProducto) {
-        return ResponseEntity.ok(
-            productoService.listarProductos(clave, idTipoProducto));
-        
-        
+    @GetMapping("")
+    public ResponseEntity<List<ProductoDTO>> listarProductos() {
+        List<ProductoDTO> productos = productoService.listarProductos();
+        return ResponseEntity.ok(productos);
     }
 
     @PostMapping("")
