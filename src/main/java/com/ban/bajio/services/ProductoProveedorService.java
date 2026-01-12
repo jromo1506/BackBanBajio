@@ -1,18 +1,24 @@
 package com.ban.bajio.services;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import com.ban.bajio.dto.CatalogoDTO;
 import com.ban.bajio.repository.ProductoProveedorRepository;
-
+import com.ban.bajio.repository.ProveedorRepository;
 import jakarta.transaction.Transactional;
 
 @Service
 public class ProductoProveedorService {
+
+    private final ProveedorRepository proveedorRepository;
     
     private final ProductoProveedorRepository productoProveedorRepository;
 
-    public ProductoProveedorService( ProductoProveedorRepository productoProveedorRepository) {
+    public ProductoProveedorService( ProductoProveedorRepository productoProveedorRepository, ProveedorRepository proveedorRepository) {
          this.productoProveedorRepository = productoProveedorRepository;
+         this.proveedorRepository = proveedorRepository;
     }
 
     
@@ -39,5 +45,12 @@ public class ProductoProveedorService {
     @Transactional
     public void quitarProveedor(Long idProductoProveedor) {
         productoProveedorRepository.eliminarProductoProveedor(idProductoProveedor);
+    }
+
+
+   
+
+    public List<CatalogoDTO> obtenerCatalogo() {
+        return productoProveedorRepository.obtenerCatalogo();
     }
 }

@@ -2,6 +2,9 @@ package com.ban.bajio.models;
 
 import jakarta.persistence.*;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.*;
 
 @Getter
@@ -24,6 +27,7 @@ public class Proveedor {
     private String descripcion;
 
     @OneToMany(mappedBy = "proveedor")
+    @JsonIgnore
     private List<ProductoProveedor> productos;
 
     // getters y setters

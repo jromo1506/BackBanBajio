@@ -3,8 +3,11 @@ package com.ban.bajio.controllers;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ban.bajio.dto.CatalogoDTO;
 import com.ban.bajio.repository.ProductoProveedorRepository;
 import com.ban.bajio.services.ProductoProveedorService;
+
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,11 +20,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@RequestMapping("/api/prouctos/{idProducto}/proveedores")
-public class ProuctoProveedorController {
+@RequestMapping("/api/productos/{idProducto}/proveedores")
+public class ProductoProveedorController {
       private final ProductoProveedorService productoProveedorService;
 
-    public ProuctoProveedorController(ProductoProveedorService productoProveedorService) {
+    public ProductoProveedorController(ProductoProveedorService productoProveedorService) {
        this.productoProveedorService = productoProveedorService;
     }
 
@@ -61,6 +64,6 @@ public class ProuctoProveedorController {
         productoProveedorService.quitarProveedor(idProductoProveedor);
         return ResponseEntity.ok().build();
     }
-    
+
     
 }
