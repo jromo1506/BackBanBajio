@@ -13,5 +13,5 @@ public class ProductoRequest {
     private String nombre;
     private BigDecimal precio;
     private Long idTipoProducto;
-    private String estatus;
+    private Boolean estatus;
 }

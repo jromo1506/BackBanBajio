@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.ban.bajio.dto.ProductoDTO;
 import com.ban.bajio.dto.ProductoRequest;
 import com.ban.bajio.models.Producto;
+import com.ban.bajio.models.TipoProducto;
 import com.ban.bajio.repository.ProductoRepository;
 
 import jakarta.transaction.Transactional;
@@ -58,16 +59,28 @@ public class ProductoService {
 }
 
 
-    @Transactional
-    public void actualizarProducto(Long idProducto, Producto producto) {
-        productoRepository.actualizarProducto(
-                idProducto,
-                producto.getNombre(),
-                producto.getPrecio().doubleValue(),
-                producto.getTipoProducto().getIdTipoProducto(),
-                producto.getEsActivo()
-        );
+  @Transactional
+public void actualizarProducto(Long idProducto, ProductoRequest req) {
+
+    Producto producto = productoRepository.findById(idProducto)
+        .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+
+    producto.setClave(req.getClave());
+    producto.setNombre(req.getNombre());
+    producto.setPrecio(req.getPrecio());
+    producto.setEsActivo(req.getEstatus());
+
+    // 🔥 NO LEAS tipoProducto, SOLO SETÉALO
+    if (req.getIdTipoProducto() != null) {
+        TipoProducto tipo = new TipoProducto();
+        tipo.setIdTipoProducto(req.getIdTipoProducto());
+        producto.setTipoProducto(tipo);
+    } else {
+        producto.setTipoProducto(null);
     }
+
+    productoRepository.save(producto);
+}
 
     @Transactional
     public void eliminarProducto(Long idProducto) {

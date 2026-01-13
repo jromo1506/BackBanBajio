@@ -53,4 +53,18 @@ public class ProductoProveedorService {
     public List<CatalogoDTO> obtenerCatalogo() {
         return productoProveedorRepository.obtenerCatalogo();
     }
+
+
+    @Transactional
+    public List<CatalogoDTO> filtrar(
+            Long idTipoProducto,
+            Boolean esActivo,
+            String busqueda
+    ) {
+        return productoProveedorRepository.filtrarCatalogo(
+                idTipoProducto,
+                esActivo,
+                busqueda
+        );
+    }
 }

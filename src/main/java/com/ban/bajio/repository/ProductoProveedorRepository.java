@@ -34,4 +34,13 @@ public interface ProductoProveedorRepository extends JpaRepository<ProductoProve
     void eliminarProductoProveedor(
             @Param("p_id_producto_proveedor") Long idProductoProveedor
     );
+
+
+
+     @Procedure(procedureName = "sp_filtrar_catalogo")
+    List<CatalogoDTO> filtrarCatalogo(
+            @Param("p_id_tipo_producto") Long idTipoProducto,
+            @Param("p_es_activo") Boolean esActivo,
+            @Param("p_busqueda") String busqueda
+    );
 }
